@@ -20,11 +20,11 @@ allprojects {
         jcenter()
 
         maven {
-            url "http://143.89.39.114:8081/repository/project_qbs/"
+            url "http://143.89.39.114:8081/repository/wherami/"
 
             credentials {
-                username 'client_qbs'
-                password 'RdhHbmfX5g'
+                username 'path_advisor'
+                password 'hkust'
             }
         }
     }
