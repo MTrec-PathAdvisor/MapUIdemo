@@ -3,8 +3,11 @@ package com.wherami.mapuidemo.SpeedCalculator;
 import android.os.Handler;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import wherami.lbs.sdk.data.Poi;
 
 public class Calibrator {
 
@@ -13,7 +16,7 @@ public class Calibrator {
     Handler hRefresh;
     XYZAccelerometer acc;
     int eventNumber;
-    private LinkedList calData;
+    private List<Point> calData;
 
     public Calibrator(Handler hRefresh, XYZAccelerometer acc, int eventNumber) {
         this.hRefresh = hRefresh;
@@ -52,13 +55,13 @@ public class Calibrator {
                 UPDATE_INTERVAL);
     }
 
-    private void addCalData(LinkedList cD) {
+    private void addCalData(List<Point> cD) {
         Point p = acc.getPoint();
         cD.add(p);
         acc.reset();
     }
 
-    private void calSensor(LinkedList<MeasurePoint> cD) throws Exception {
+    private void calSensor(List<Point> cD) throws Exception {
         if (cD.size() < ITERATIONS-1) {
             throw new Exception("not enough data to calibrate");
         }

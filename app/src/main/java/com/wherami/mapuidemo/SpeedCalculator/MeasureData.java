@@ -1,6 +1,10 @@
 package com.wherami.mapuidemo.SpeedCalculator;
 
 import android.content.Context;
+import android.widget.TextView;
+
+import com.wherami.mapuidemo.MapActivity;
+import com.wherami.mapuidemo.TestActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +18,7 @@ public class MeasureData {
 
     // timer interval of generating points
     private long interval;
+    private TextView view;
 
     public MeasureData(long interval) {
         this.interval = interval;
@@ -22,19 +27,29 @@ public class MeasureData {
     }
 
     public void addPoint(Point p){
-        accData.add(p);
+        if (accData.size()> MapActivity.MEASURE_TIMES){
+            accData.removeFirst();
+        }
+        accData.addLast(p);
     }
 
     public void process(){
 
         for(int i = 0; i < accData.size(); ++i){
             Point p = accData.get(i);
-            float speed = 0;
+            float speed = 0.0F;
 
             if(i > 0){
                 speed = data.get(i-1).getSpeedAfter();
             }
+            if (data.size()>MapActivity.MEASURE_TIMES){
+                data.removeFirst();
+            }
             data.add(new MeasurePoint(p.getX(), p.getY(), p.getZ(), speed, interval, getAveragePoint()));
+            if (view!=null){
+                String speedstr = Float.toString(speed);
+                view.append(i+": "+speedstr+" \n");
+            }
         }
     }
 
@@ -81,5 +96,9 @@ public class MeasureData {
     public float getLastSpeedKm(){
         float ms = getLastSpeed();
         return ms*3.6f;
+    }
+
+    public void setView(TextView tv) {
+        this.view =tv;
     }
 }

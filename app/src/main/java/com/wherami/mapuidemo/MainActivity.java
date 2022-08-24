@@ -75,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
             // This is a development server serves as debug purpose only
             // One should setup a http(s) server and host the files under
             // http(s)://<host>/generated_assets/SmartIDCentre/offline_data/
-            Client.Configure("http://143.89.199.79", "HKUST_2F_peter", this);
-//            Map<String, Object> config = new HashMap<>();
-//            config.put("wherami.lbs.sdk.core.MapEngineFactory:EngineType", "wherami.lbs.sdk.core.NativeMapEngine");
-//            Client.ConfigExtra(config);
+//            Client.Configure("http://143.89.199.79", "HKUST_2F_peter", this);
+            Client.Configure("http://143.89.199.79", "MTR_EXC", this);
+            Map<String, Object> config = new HashMap<>();
+            config.put("wherami.lbs.sdk.core.MapEngineFactory:EngineType", "wherami.lbs.sdk.core.NativeMapEngine");
+            Client.ConfigExtra(config);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (StreamCorruptedException e) {

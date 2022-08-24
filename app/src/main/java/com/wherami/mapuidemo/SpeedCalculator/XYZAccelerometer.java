@@ -80,4 +80,7 @@ public class XYZAccelerometer extends Accelerometer {
     public  void setdZ(float dZ) {
         this.dZ = dZ;
     }
+    public float getdAccThreshold(){
+        return (float) Math.sqrt(dX*dX+dY*dY+dZ*dZ);
+    }
 }

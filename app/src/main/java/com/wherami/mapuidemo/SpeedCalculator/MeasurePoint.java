@@ -1,5 +1,9 @@
 package com.wherami.mapuidemo.SpeedCalculator;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 public class MeasurePoint {
     private float x;
     private float y;
@@ -28,14 +32,18 @@ public class MeasurePoint {
                 this.y*averagePoint.getY() +
                 this.z*averagePoint.getZ();
         acceleration = acceleration / ((float)Math.sqrt(averagePoint.getForce()));
-        float t = ((float)interval / 1000f);
-        speedAfter = speedBefore + acceleration * t;
-        distance = speedBefore*t + acceleration*t*t/2;
+//        acceleration = (float) Math.sqrt(x*x+y*y+z*z);
+        float t = (float)(interval / 1000f); // in s
+        speedAfter = speedBefore + acceleration * t; // vt = v(t-1) + a * deltaT
+        distance = speedBefore*t + acceleration*t*t/2; // v(t-1)*t + a*t*t/2
+        Log.d(TAG, "calc: acce "+String.valueOf(acceleration));
+//        Log.d(TAG, "calc: xyz "+String.valueOf(x)+" "+String.valueOf(y)+" "+String.valueOf(z)+" ");
+//        Log.d(TAG, "calc: u v "+String.valueOf(speedBefore)+" -> "+String.valueOf(speedAfter));
 
     }
 
     public String getStoreString(){
-        String s = "write here whatever you want";
+        String s = x +","+y+","+z+":a="+acceleration+" u="+speedBefore+" v="+speedAfter+" d="+distance ;
         return s;
     }
 
