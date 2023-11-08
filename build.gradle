@@ -27,6 +27,9 @@ allprojects {
                 password 'hkust'
             }
         }
+//        flatDir {
+//            dirs 'libs'
+//        }
     }
 }
 
